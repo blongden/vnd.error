@@ -18,17 +18,19 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 ## Media Type Identifiers
 
-application/vnd.error+xml
-application/vnd.error+json
+* application/vnd.error+xml
+* application/vnd.error+json
 
 ## Examples
 
+application/vnd.error+xml
 ```
 <error id="42" message="Validation failed">
     <link rel='info' href='http://...' />
 </error>
 ```
 
+application/vnd.error+json
 ```
 {
     "_id": 42,
