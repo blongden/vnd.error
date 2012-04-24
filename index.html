@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Vnd.error : application/vnd.error mime type specification" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Vnd.error</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/blongden/vnd.error">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Vnd.error</h1>
+          <h2 id="project_tagline">application/vnd.error mime type specification</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/blongden/vnd.error/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/blongden/vnd.error/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>vnd.error</h1>
+
+<ul>
+<li>Author: Ben Longden <a href="mailto:ben@nocarrier.co.uk">ben@nocarrier.co.uk</a>
+</li>
+<li>Date: 2012-04-24 (Created)</li>
+<li>Status: Draft</li>
+</ul><h2>Description</h2>
+
+<p>vnd.error is a simple way of expressing an error response in XML or JSON.</p>
+
+<p>Often when returning a response to a client a response type is needed to represent a problem to the user (human or otherwise).  A media type representing this error is a convenient way of expressing the error in a standardised format and can be understood by many client applications.</p>
+
+<h2>Compliance</h2>
+
+<p>An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be “unconditionally compliant”; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be “conditionally compliant.”</p>
+
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.</p>
+
+<h2>Media Type Identifiers</h2>
+
+<ul>
+<li>application/vnd.error+xml</li>
+<li>application/vnd.error+json</li>
+</ul><h2>Examples</h2>
+
+<p>application/vnd.error+xml</p>
+
+<pre><code>&lt;error id="42" message="Validation failed"&gt;
+    &lt;link rel='info' href='http://...' /&gt;
+&lt;/error&gt;
+</code></pre>
+
+<p>application/vnd.error+json</p>
+
+<pre><code>{
+    "_id": 42,
+    "_message": "Validation failed",
+    "_links": [
+        { "rel": "info", "href": "http://..." }
+    ]
+}
+</code></pre>
+
+<h2>Components</h2>
+
+<p>vnd.error provides hypertext capabilitied via two elements.</p>
+
+<h3>error</h3>
+
+<p>REQUIRED</p>
+
+<p>The root element representing the error itself. The three other hypertext elements MUST be contained within the error representation (see examples above).</p>
+
+<h3>link</h3>
+
+<p>OPTIONAL</p>
+
+<p>For expressing "outbound" hyperlinks to other, related resources.</p>
+
+<h2>Error Attributes</h2>
+
+<h3>id</h3>
+
+<p>REQUIRED</p>
+
+<p>For expressing an identifier to refer to the specific error on the server side for logging purposes.</p>
+
+<h3>message</h3>
+
+<p>REQUIRED</p>
+
+<p>For expressing a human readable message related to the current error.</p>
+
+<h2>Link Attributes</h2>
+
+<h3>rel</h3>
+
+<p>REQUIRED</p>
+
+<p>For identifying how the target URI relates to the ‘Subject Resource’. The Subject Resource is the closest parent error element.</p>
+
+<p>rel corresponds with the '<a href="http://tools.ietf.org/html/rfc5988#section-5.3">relation parameter</a>' as defined in <a href="http://tools.ietf.org/html/rfc5988">Web Linking (RFC 5988)</a></p>
+
+<p>rel attribute SHOULD be used to identify link elements in vnd.error representation.</p>
+
+<h3>href</h3>
+
+<p>REQUIRED</p>
+
+<p>This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the rel value.</p>
+
+<h2>Constraints</h2>
+
+<p>The root of a vnd.error representation MUST be a Error element.</p>
+
+<h2>Acknowledgements</h2>
+
+<p>Thanks to Mike Kelly, Darrel Miller and Mike Amundsen for their initial discusson on vnd.error+xml on the 'Hal Discuss' group.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Vnd.error maintained by <a href="https://github.com/blongden">blongden</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
