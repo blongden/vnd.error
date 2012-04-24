@@ -10,6 +10,8 @@ vnd.error is a simple way of expressing an error response in XML or JSON.
 
 Often when returning a response to a client a response type is needed to represent a problem to the user (human or otherwise).  A media type representing this error is a convenient way of expressing the error in a standardised format and can be understood by many client applications.
 
+This media type is intended for use with the HTTP status codes 4xx and 5xx, though this does not exclude it from use in any other scenario.
+
 ## Compliance
 
 An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be “unconditionally compliant”; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be “conditionally compliant.”
