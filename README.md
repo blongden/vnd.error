@@ -26,7 +26,7 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 application/vnd.error+xml
 ```xml
 <error id="42" message="Validation failed">
-    <link rel='info' href='http://...' />
+    <link rel='info' href='http://...' title='Error information'/>
 </error>
 ```
 
@@ -35,9 +35,7 @@ application/vnd.error+json
 {
     "_id": 42,
     "_message": "Validation failed",
-    "_links": [
-        { "rel": "info", "href": "http://..." }
-    ]
+    "_links": { "info": [ { "href":  "http://...", "title": "Error information" } ] }
 }
 ```
 
@@ -88,6 +86,12 @@ rel attribute SHOULD be used to identify link elements in vnd.error representati
 REQUIRED
 
 This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the rel value.
+
+### title
+
+OPTIONAL
+
+For labeling the destination of a link with a human-readable identifier.
 
 ## Constraints
 
