@@ -79,7 +79,7 @@ REQUIRED
 
 For identifying how the target URI relates to the ‘Subject Resource’. The Subject Resource is the closest parent error element.
 
-rel corresponds with the '[relation parameter](http://tools.ietf.org/html/rfc5988#section-5.3)' as defined in [Web Linking (RFC 5988)](http://tools.ietf.org/html/rfc5988)
+rel corresponds with the '[relation parameter](http://tools.ietf.org/html/rfc5988#section-5.3)' as defined in [Web Linking (RFC 5988)](http://tools.ietf.org/html/rfc5988).
 
 rel attribute SHOULD be used to identify link elements in vnd.error representation.
 
