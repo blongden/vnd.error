@@ -28,7 +28,7 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 application/vnd.error+xml
 ```xml
 <error id="42" message="Validation failed">
-    <link rel='info' href='http://...' title='Error information'/>
+    <link rel='help' href='http://...' title='Error information'/>
 </error>
 ```
 
@@ -37,7 +37,7 @@ application/vnd.error+json
 {
     "_id": 42,
     "_message": "Validation failed",
-    "_links": { "info": [ { "href":  "http://...", "title": "Error information" } ] }
+    "_links": { "help": [ { "href":  "http://...", "title": "Error information" } ] }
 }
 ```
 
