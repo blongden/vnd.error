@@ -27,7 +27,9 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 application/vnd.error+xml
 ```xml
-<error id="42" message="Validation failed">
+<error id="42">
+    <message xml:lang="en">Validation failed</message>
+    <message xml:lang="de">Validierung fehlgeschlagen</message>
     <link rel='help' href='http://...' title='Error information'/>
 </error>
 ```
@@ -35,9 +37,16 @@ application/vnd.error+xml
 application/vnd.error+json
 ```json
 {
-    "_id": 42,
-    "_message": "Validation failed",
-    "_links": { "help": [ { "href":  "http://...", "title": "Error information" } ] }
+    "id": 42,
+    "messages": [ 
+        { "lang": "en", "message": "Validation failed" },
+        { "lang": "de", "message": "Validierung fehlgeschlagen" }
+    ],
+    "_links": {
+        "help": [
+            { "href":  "http://...", "title": "Error information" }
+        ]
+    }
 }
 ```
 
@@ -94,6 +103,13 @@ This attribute MAY contain a URI template. Whether or not this is the case SHOUL
 OPTIONAL
 
 For labeling the destination of a link with a human-readable identifier.
+
+### hreflang
+
+OPTIONAL
+
+For indicating what the language of the result of dereferencing the link should be.
+
 
 ## Constraints
 
