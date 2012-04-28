@@ -12,6 +12,8 @@ Often when returning a response to a client a response type is needed to represe
 
 This media type is intended for use with the HTTP status codes 4xx and 5xx, though this does not exclude it from use in any other scenario.
 
+It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead. The XML variation can take advantage of the [xml:lang](http://www.w3.org/TR/xml/#sec-lang-tag) attribute if a need arises.
+
 ## Compliance
 
 An implementation is not compliant if it fails to satisfy one or more of the MUST or REQUIRED level requirements. An implementation that satisfies all the MUST or REQUIRED level and all the SHOULD level requirements is said to be “unconditionally compliant”; one that satisfies all the MUST level requirements but not all the SHOULD level requirements is said to be “conditionally compliant.”
@@ -27,9 +29,8 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 application/vnd.error+xml
 ```xml
-<error id="42">
-    <message xml:lang="en">Validation failed</message>
-    <message xml:lang="de">Validierung fehlgeschlagen</message>
+<error id="42" xml:lang="en">
+    <message>Validation failed</message>
     <link rel='help' href='http://...' title='Error information'/>
 </error>
 ```
@@ -38,10 +39,7 @@ application/vnd.error+json
 ```json
 {
     "id": 42,
-    "messages": [ 
-        { "lang": "en", "message": "Validation failed" },
-        { "lang": "de", "message": "Validierung fehlgeschlagen" }
-    ],
+    "message": "Validation failed",
     "_links": {
         "help": [
             { "href":  "http://...", "title": "Error information" }
@@ -109,7 +107,6 @@ For labeling the destination of a link with a human-readable identifier.
 OPTIONAL
 
 For indicating what the language of the result of dereferencing the link should be.
-
 
 ## Constraints
 
