@@ -1,7 +1,8 @@
 # vnd.error
 
 * Author: Ben Longden <ben@nocarrier.co.uk>
-* Date: 2012-04-24 (Created)
+* Created: 2012-04-24
+* Last modified: 2012-06-29
 * Status: Draft
 
 ## Description
@@ -12,7 +13,7 @@ Often when returning a response to a client a response type is needed to represe
 
 This media type is intended for use with the HTTP status codes 4xx and 5xx, though this does not exclude it from use in any other scenario.
 
-It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead. The XML variation can take advantage of the [xml:lang](http://www.w3.org/TR/xml/#sec-lang-tag) attribute if a need arises.
+It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead. The XML variation may take advantage of the [xml:lang](http://www.w3.org/TR/xml/#sec-lang-tag) attribute if a need arises.
 
 ## Compliance
 
@@ -29,34 +30,42 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 application/vnd.error+xml
 ```xml
-<error id="42" xml:lang="en">
-    <message>Validation failed</message>
-    <link rel='help' href='http://...' title='Error information'/>
-</error>
+<errors xml:lang="en">
+    <error logref=42>
+        <message>Validation failed</message>
+        <link rel='help' href='http://...' title='Error information'/>
+        <link rel='describes' href='http://...' title='Error description'/>
+    </error>
+</errors>
 ```
 
 application/vnd.error+json
 ```json
-{
-    "id": 42,
-    "message": "Validation failed",
-    "_links": {
-        "help": [
-            { "href":  "http://...", "title": "Error information" }
-        ]
+[
+    {
+        "logref": 42,
+        "message": "Validation failed",
+        "_links": {
+            "help": [
+                { "href":  "http://...", "title": "Error information" }
+            ],
+            "describes": [
+                { "href":  "http://...", "title": "Error description" }
+            ]
+        }
     }
-}
+]
 ```
 
 ## Components
 
-vnd.error provides hypertext capabilitied via two elements.
+vnd.error provides hypertext capabilities via two elements.
 
 ### error
 
 REQUIRED
 
-The root element representing the error itself. The three other hypertext elements MUST be contained within the error representation (see examples above).
+The root element representing the errors themselves. Within the root element are 1 to N error representations as represented by the media format. The three other hypertext elements MUST be contained within the error representation (see examples above).
 
 ### link
 
@@ -66,17 +75,17 @@ For expressing "outbound" hyperlinks to other, related resources.
 
 ## Error Attributes
 
-### id
+### logref
 
 REQUIRED
 
-For expressing an identifier to refer to the specific error on the server side for logging purposes.
+For expressing a (numeric/alpha/alphanumeric) identifier to refer to the specific error on the server side for logging purposes (i.e. a request number).
 
 ### message
 
 REQUIRED
 
-For expressing a human readable message related to the current error.
+For expressing a human readable message related to the current error which may be displayed to the user of the api.
 
 ## Link Attributes
 
@@ -110,7 +119,7 @@ For indicating what the language of the result of dereferencing the link should 
 
 ## Constraints
 
-The root of a vnd.error representation MUST be a Error element.
+The root of a vnd.error representation MUST be an 'errors' element containing one or more 'error' representations.
 
 ## Acknowledgements
 
