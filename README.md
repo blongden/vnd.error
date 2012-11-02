@@ -121,6 +121,10 @@ For indicating what the language of the result of dereferencing the link should 
 
 The root of a vnd.error representation MUST be an 'errors' element containing one or more 'error' representations.
 
+## Implementations
+
+PHP - [Rhumsaa\VndError](https://github.com/ramsey/vnderror)
+
 ## Acknowledgements
 
 Thanks to Mike Kelly, Darrel Miller and Mike Amundsen for their initial discusson on vnd.error+xml on the 'Hal Discuss' group.
