@@ -30,8 +30,8 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 application/vnd.error+xml
 ```xml
-<errors xml:lang="en">
-    <error logref=42>
+<errors xml:lang='en'>
+    <error logref='42'>
         <message>Validation failed</message>
         <link rel='help' href='http://...' title='Error information'/>
         <link rel='describes' href='http://...' title='Error description'/>
