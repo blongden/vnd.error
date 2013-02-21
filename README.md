@@ -46,12 +46,8 @@ application/vnd.error+json
         "logref": 42,
         "message": "Validation failed",
         "_links": {
-            "help": [
-                { "href":  "http://...", "title": "Error information" }
-            ],
-            "describes": [
-                { "href":  "http://...", "title": "Error description" }
-            ]
+            "help": { "href":  "http://...", "title": "Error information" },
+            "describes": { "href":  "http://...", "title": "Error description" }
         }
     }
 ]
