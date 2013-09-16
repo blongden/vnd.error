@@ -53,6 +53,26 @@ application/vnd.error+json
 ]
 ```
 
+application/vnd.error+edn
+```edn
+[
+  {
+    :logref 42
+    :message "Validation failed"
+    :links {
+      :help {
+        :href "http://..."
+        :title "Error information"
+      }
+      :describes {
+        :href "http://..."
+        :title "Error description"
+      }
+    }
+  }
+]
+```
+
 ## Components
 
 vnd.error provides hypertext capabilities via two elements.
