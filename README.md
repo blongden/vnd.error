@@ -58,22 +58,6 @@ application/vnd.error+json
 }
 ```
 
-## Components
-
-vnd.error provides hypertext capabilities via two elements.
-
-### error
-
-REQUIRED
-
-The root element representing the errors themselves. Within the root element are 1 to N error representations as represented by the media format. The three other hypertext elements MUST be contained within the error representation (see examples above).
-
-### link
-
-OPTIONAL
-
-For expressing "outbound" hyperlinks to other, related resources.
-
 ## Error Attributes
 
 ### logref
@@ -90,41 +74,15 @@ For expressing a human readable message related to the current error which may b
 
 ## Link Attributes
 
-### rel
-
-REQUIRED
-
-For identifying how the target URI relates to the ‘Subject Resource’. The Subject Resource is the closest parent error element.
-
-rel corresponds with the '[relation parameter](http://tools.ietf.org/html/rfc5988#section-5.3)' as defined in [Web Linking (RFC 5988)](http://tools.ietf.org/html/rfc5988).
-
-rel attribute SHOULD be used to identify link elements in vnd.error representation.
+Link attributes follow the same semantics as defined in the HAL specification [section 5](http://tools.ietf.org/html/draft-kelly-json-hal-06#section-5). For completeness, the required elements are all represented below.
 
 ### href
 
-REQUIRED
+The "href" property is REQUIRED.
 
-This attribute MAY contain a URI template. Whether or not this is the case SHOULD be indicated to clients by the rel value.
+Its value is either a URI [RFC3986](http://tools.ietf.org/html/rfc3986) or a URI Template [RFC6570](http://tools.ietf.org/html/rfc6570).
 
-### title
-
-OPTIONAL
-
-For labeling the destination of a link with a human-readable identifier.
-
-### hreflang
-
-OPTIONAL
-
-For indicating what the language of the result of dereferencing the link should be.
-
-## Constraints
-
-The root of a vnd.error representation MUST be an 'errors' element containing one or more 'error' representations.
-
-## Implementations
-
-PHP - [Rhumsaa\VndError](https://github.com/ramsey/vnderror)
+If the value is a URI Template then the Link Object SHOULD have a "templated" attribute whose value is true.
 
 ## Recommendations
 
