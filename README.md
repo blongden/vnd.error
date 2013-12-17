@@ -60,17 +60,17 @@ application/vnd.error+json
 
 ## Error Attributes
 
-### logref
-
-REQUIRED
-
-For expressing a (numeric/alpha/alphanumeric) identifier to refer to the specific error on the server side for logging purposes (i.e. a request number).
-
 ### message
 
 REQUIRED
 
 For expressing a human readable message related to the current error which may be displayed to the user of the api.
+
+### logref
+
+OPTIONAL
+
+For expressing a (numeric/alpha/alphanumeric) identifier to refer to the specific error on the server side for logging purposes (i.e. a request number).
 
 ## Link Attributes
 
