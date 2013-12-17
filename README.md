@@ -121,6 +121,12 @@ The root of a vnd.error representation MUST be an 'errors' element containing on
 
 PHP - [Rhumsaa\VndError](https://github.com/ramsey/vnderror)
 
+## Recommendations
+
+### Retry-After
+
+RFC2616 defines the [Retry-After](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.37) header for use with a 503 (Service Unavailable), or 3xx response. If you wish to communicate a delay before retrying a request, for example 'Rate limit reached', make use of this with the vnd.error document.
+
 ## Acknowledgements
 
 Thanks to Mike Kelly, Darrel Miller and Mike Amundsen for their initial discusson on vnd.error+xml on the 'Hal Discuss' group.
