@@ -9,11 +9,13 @@
 
 vnd.error is a simple way of expressing an error response in XML or JSON.
 
-Often when returning a response to a client a response type is needed to represent a problem to the user (human or otherwise).  A media type representing this error is a convenient way of expressing the error in a standardised format and can be understood by many client applications.
+Often when returning a response to a client a response type is needed to represent a problem to the user (human or otherwise).  A media type representation is a convenient way of expressing the error in a standardised format and can be understood by many client applications.
+
+The format is 100% compatible with the [HAL specification](http://tools.ietf.org/html/draft-kelly-json-hal). This draft adds a series of link relations, body elements and recommendations for communicating an error state.
 
 This media type is intended for use with the HTTP status codes 4xx and 5xx, though this does not exclude it from use in any other scenario.
 
-It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead. The XML variation may take advantage of the [xml:lang](http://www.w3.org/TR/xml/#sec-lang-tag) attribute if a need arises.
+The vnd.error+json
 
 ## Compliance
 
@@ -30,27 +32,30 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 application/vnd.error+xml
 ```xml
-<errors xml:lang='en'>
-    <error logref='42'>
-        <message>Validation failed</message>
-        <link rel='help' href='http://...' title='Error information'/>
-        <link rel='describes' href='http://...' title='Error description'/>
-    </error>
-</errors>
+<?xml version="1.0"?>
+<resource logref="42">
+  <link rel="help" href="http://.../" title="Error Information"/>
+  <link rel="describes" href="http://.../" title="Error Description"/>
+  <message>Validation failed</message>
+</resource>
 ```
 
 application/vnd.error+json
 ```json
-[
-    {
-        "logref": 42,
-        "message": "Validation failed",
-        "_links": {
-            "help": { "href":  "http://...", "title": "Error information" },
-            "describes": { "href":  "http://...", "title": "Error description" }
+{
+    "logref": 42,
+    "message": "Validation failed",
+    "_links": {
+        "help": {
+            "href": "http://.../",
+            "title": "Error Information"
+        },
+        "describes": {
+            "href": "http://.../",
+            "title": "Error Description"
         }
     }
-]
+}
 ```
 
 ## Components
@@ -126,6 +131,10 @@ PHP - [Rhumsaa\VndError](https://github.com/ramsey/vnderror)
 ### Retry-After
 
 RFC2616 defines the [Retry-After](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.37) header for use with a 503 (Service Unavailable), or 3xx response. If you wish to communicate a delay before retrying a request, for example 'Rate limit reached', make use of this with the vnd.error document.
+
+### I18n
+
+It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead. The XML variation may take advantage of the [xml:lang](http://www.w3.org/TR/xml/#sec-lang-tag) attribute if a need arises.
 
 ## Acknowledgements
 
