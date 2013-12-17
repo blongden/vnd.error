@@ -84,6 +84,20 @@ Its value is either a URI [RFC3986](http://tools.ietf.org/html/rfc3986) or a URI
 
 If the value is a URI Template then the Link Object SHOULD have a "templated" attribute whose value is true.
 
+## Link Relations
+
+### help
+
+The "help" link relation is OPTIONAL.
+
+Links to a document describing the error. This has the same definition as the help link relation in the [HTML5 specification](http://www.w3.org/TR/html5/links.html#link-type-help)
+
+### describes
+
+The "help" link relation is OPTIONAL.
+
+Present if this error representation describes another representation of the error on the server side. See [RFC6892](http://tools.ietf.org/html/rfc6892) for further details.
+
 ## Recommendations
 
 ### Retry-After
