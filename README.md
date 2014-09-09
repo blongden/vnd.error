@@ -2,7 +2,7 @@
 
 * Author: Ben Longden <ben@nocarrier.co.uk>
 * Created: 2012-04-24
-* Last modified: 2013-12-17
+* Last modified: 2014-09-09
 * Status: Draft
 
 ## Description
@@ -26,31 +26,41 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 * application/vnd.error+xml
 * application/vnd.error+json
 
+## Profile Links
+
+Whilst the specification does register its own media type identifiers, it is also possible to use the profile link relation below  ([RFC6906](https://tools.ietf.org/html/rfc6906)) along side the application/hal+json or application/hal+xml media types.
+
+* http://nocarrier.co.uk/profiles/vnd.error/
+
 ## Examples
 
 application/vnd.error+xml
 ```xml
 <?xml version="1.0"?>
 <resource logref="42">
-  <link rel="help" href="http://.../" title="Error Information"/>
-  <link rel="describes" href="http://.../" title="Error Description"/>
+  <link rel="about" href="http://path.to/user/resource/1"/>
+  <link rel="describes" href="http://path.to/describes"/>
+  <link rel="help" href="http://path.to/help"/>
   <message>Validation failed</message>
+  <path>/username</path>
 </resource>
 ```
 
 application/vnd.error+json
 ```json
 {
-    "logref": 42,
     "message": "Validation failed",
+    "path": "/username",
+    "logref": 42,
     "_links": {
-        "help": {
-            "href": "http://.../",
-            "title": "Error Information"
+        "about": {
+            "href": "http://path.to/user/resource/1"
         },
         "describes": {
-            "href": "http://.../",
-            "title": "Error Description"
+            "href": "http://path.to/describes"
+        },
+        "help": {
+            "href": "http://path.to/help"
         }
     }
 }
@@ -69,6 +79,12 @@ For expressing a human readable message related to the current error which may b
 OPTIONAL
 
 For expressing a (numeric/alpha/alphanumeric) identifier to refer to the specific error on the server side for logging purposes (i.e. a request number).
+
+### path
+
+OPTIONAL
+
+For expressing a JSON Pointer ([RFC6901](http://tools.ietf.org/html/rfc6901)) to a field in related resource (contained in the 'about' link relation) that this error is relevant for.
 
 ## Link Attributes
 
@@ -95,6 +111,12 @@ Links to a document describing the error. This has the same definition as the he
 The "help" link relation is OPTIONAL.
 
 Present if this error representation describes another representation of the error on the server side. See [RFC6892](http://tools.ietf.org/html/rfc6892) for further details.
+
+### about
+
+The "about" link relation is OPTIONAL.
+
+Links to a resource that this error is related to. See [RFC6903](http://tools.ietf.org/html/rfc6903#section-2) for further details.
 
 ## Recommendations
 
