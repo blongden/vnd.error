@@ -108,7 +108,7 @@ Links to a document describing the error. This has the same definition as the he
 
 ### describes
 
-The "help" link relation is OPTIONAL.
+The "describes" link relation is OPTIONAL.
 
 Present if this error representation describes another representation of the error on the server side. See [RFC6892](http://tools.ietf.org/html/rfc6892) for further details.
 
