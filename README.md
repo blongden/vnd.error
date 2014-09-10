@@ -7,7 +7,7 @@
 
 ## Description
 
-vnd.error is a simple way of expressing an error response in XML or JSON.
+vnd.error is a simple way of expressing an error response in JSON.
 
 Often when returning a response to a client a response type is needed to represent a problem to the user (human or otherwise).  A media type representation is a convenient way of expressing the error in a standardised format and can be understood by many client applications.
 
@@ -23,28 +23,15 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 
 ## Media Type Identifiers
 
-* application/vnd.error+xml
 * application/vnd.error+json
 
 ## Profile Links
 
-Whilst the specification does register its own media type identifiers, it is also possible to use the profile link relation below  ([RFC6906](https://tools.ietf.org/html/rfc6906)) along side the application/hal+json or application/hal+xml media types.
+Whilst the specification does register its own media type identifiers, it is also possible to use the profile link relation below  ([RFC6906](https://tools.ietf.org/html/rfc6906)) along side the application/hal+json media type.
 
 * http://nocarrier.co.uk/profiles/vnd.error/
 
 ## Examples
-
-application/vnd.error+xml
-```xml
-<?xml version="1.0"?>
-<resource logref="42">
-  <link rel="about" href="http://path.to/user/resource/1"/>
-  <link rel="describes" href="http://path.to/describes"/>
-  <link rel="help" href="http://path.to/help"/>
-  <message>Validation failed</message>
-  <path>/username</path>
-</resource>
-```
 
 application/vnd.error+json
 ```json
@@ -62,6 +49,73 @@ application/vnd.error+json
         "help": {
             "href": "http://path.to/help"
         }
+    }
+}
+```
+
+### Multiple Errors
+
+Multiple errors may be represented in a collection of embedded vnd.error objects.
+
+```javascript
+{
+    "total": 2,
+    "_embedded": {
+        "errors": [
+            {
+                "message": "\"username\" field validation failed",
+                "logref": 50,
+                "_links": {
+                    "help": {
+                        "href": "http://.../"
+                    }
+                }
+            },
+            {
+                "message": "\"postcode\" field validation failed",
+                "logref": 55,
+                "_links": {
+                    "help": {
+                        "href": "http://.../"
+                    }
+                }
+            }
+        ]
+    }
+}
+```
+
+### Nested Errors
+
+Nested errors may be represented by embedding multiple errors inside a vnd.error resource.
+
+```javascript
+{
+    "message": "Validation failed",
+    "logref": 42,
+    "_links": {
+        "describes": {
+            "href": "http://path.to/describes"
+        },
+        "help": {
+            "href": "http://path.to/help"
+        },
+        "about": {
+            "href": "http://path.to/user/resource/1"
+        }
+    },
+    "_embedded": {
+        "errors": [
+            {
+                "message": "Username must contain at least three characters",
+                "path": "/username",
+                "_links": {
+                    "about": {
+                        "href": "http://path.to/user/resource/1"
+                    }
+                }
+            }
+        ]
     }
 }
 ```
@@ -126,8 +180,8 @@ RFC2616 defines the [Retry-After](http://www.w3.org/Protocols/rfc2616/rfc2616-se
 
 ### I18n
 
-It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead. The XML variation may take advantage of the [xml:lang](http://www.w3.org/TR/xml/#sec-lang-tag) attribute if a need arises.
+It has been considered that internationalisation (i18n) should be incorporated into the media type, however it was decided that the Accept-Language and Content-Language headers of HTTP should be used instead.
 
 ## Acknowledgements
 
-Thanks to Mike Kelly, Darrel Miller and Mike Amundsen for their initial discusson on vnd.error+xml on the 'Hal Discuss' group.
+Thanks to Mike Kelly, Darrel Miller and Mike Amundsen for their initial discusson on vnd.error on the 'Hal Discuss' group.
