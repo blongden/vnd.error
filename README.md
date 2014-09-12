@@ -57,7 +57,7 @@ application/vnd.error+json
 
 Multiple errors may be represented in a collection of embedded vnd.error objects.
 
-```javascript
+```json
 {
     "total": 2,
     "_embedded": {
@@ -89,7 +89,7 @@ Multiple errors may be represented in a collection of embedded vnd.error objects
 
 Nested errors may be represented by embedding multiple errors inside a vnd.error resource.
 
-```javascript
+```json
 {
     "message": "Validation failed",
     "logref": 42,
