@@ -93,6 +93,7 @@ Nested errors may be represented by embedding multiple errors inside a vnd.error
 {
     "message": "Validation failed",
     "logref": 42,
+    "total": 1,
     "_links": {
         "describes": {
             "href": "http://path.to/describes"
